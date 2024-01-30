@@ -12,7 +12,7 @@ pipeline {
             steps {
                 echo 'Building Docker image'
                 script {
-                    docker.build("your_docker_hub_username/hello-guvi-geek:latest")
+                    docker.build("hitendra2229/hello-guvi-geek:latest")
                 }
             }
         }
@@ -21,7 +21,7 @@ pipeline {
                 echo 'Pushing Docker image to Docker Hub'
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials-id') {
-                        docker.image("your_docker_hub_username/hello-guvi-geek:latest").push()
+                        docker.image("hitendra2229/hello-guvi-geek:latest").push()
                     }
                 }
             }
