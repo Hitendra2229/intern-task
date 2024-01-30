@@ -1,0 +1,31 @@
+pipeline {
+    agent any
+ 
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building the web application'
+                // You can add build commands if needed
+            }
+        }
+        stage('Dockerize') {
+            steps {
+                echo 'Building Docker image'
+                script {
+                    docker.build("your_docker_hub_username/hello-guvi-geek:latest")
+                }
+            }
+        }
+        stage('Push to Docker Hub') {
+            steps {
+                echo 'Pushing Docker image to Docker Hub'
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials-id') {
+                        docker.image("your_docker_hub_username/hello-guvi-geek:latest").push()
+                    }
+                }
+            }
+        }
+    }
+}
+
